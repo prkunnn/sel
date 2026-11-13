@@ -82,26 +82,11 @@ ok-surf/
 ├── tools/build_logo.py   # 產生 LOGO（文字轉向量路徑）
 └── tests/playthrough.mjs # Playwright 自動遊玩測試
 ```
-
-## 老師如何修改
-- **改故事文字、選項、角色回應**：編輯 `js/stories.js`，每個事件都是一個物件（`lines` 對話、`emotions` 情緒、`signals` 身體訊號、`skillHint` 推薦技能、`thought` 想法拼圖、`support` 求助句、`actions` 行動與回應）。
-- **調整模擬激發程度**：`OK.EMOTIONS` 的 `lv`、`OK.SIGNALS` 的 `d`。
-- **替換美術**：`assets/svg/` 的檔案可直接換成同檔名圖片；角色與場景在 `js/art.js` 的 `CHARS` 與 `SCENES`。
-- **字型**：使用 Google Fonts 的 Noto Sans TC，離線時會自動改用系統中文字型。
-- **改 LOGO 文字**：LOGO 的字已轉成向量路徑（各瀏覽器顯示都一樣）。修改 `tools/build_logo.py` 裡的文字後執行 `python3 tools/build_logo.py`（需要 `pip install fonttools` 與 Noto Sans CJK Black 字型）。
-
 ## 設計原則（SEL）
 - 高激發不等於壞情緒；低激發不等於失敗；復原力不是一直開心。
 - 不要求玩家否認感受或強迫正向思考；每種感受都會先被接納。
 - 不同學生對同一件事可以有不同感受，選項沒有標準答案。
 - 情緒數值只用於遊戲模擬，不測量、也不宣稱代表玩家的真實心理狀態。
-
-## 測試
-```bash
-python3 -m http.server 8765 &
-node tests/playthrough.mjs sports desktop shots   # 也可用 exam / trip、mobile
-```
-測試機器人會從首頁一路玩到結果頁：選情緒（含「其他感受」）、身體訊號、四種小遊戲、三種衝浪挑戰、校外教學的安全選項，並檢查 JavaScript 錯誤與文字溢出、輸出截圖與成果卡 PNG。
 
 ## 授權
 所有程式、美術（SVG／Canvas 向量繪製）與音效（Web Audio 即時合成）皆為本專案原創，沒有使用任何外部圖片或音檔。
