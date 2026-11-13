@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教師說明｜OK 曲線衝浪：我的校園一天</title>
+<link rel="icon" href="assets/svg/badge-resilience.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #23395b; --soft: #4d6585; --paper: #fffdf7;
+    --sun: #ffb938; --sky: #4fb8e6; --high: #ff7a59; --ok: #3fbf7f; --low: #5b8def;
+    --shadow: 0 6px 0 rgba(35,57,91,.12), 0 12px 26px rgba(35,57,91,.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); line-height: 1.7;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: linear-gradient(#bfe9f7 0, #e9f8ff 420px, #f6fbff 100%);
+  }
+  .wrap { width: min(1080px, 100% - 32px); margin: 0 auto; }
+  h2 { font-size: clamp(22px, 3vw, 28px); margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
+  h2 .no { background: var(--ink); color: #fff; border-radius: 99px; font-size: .6em; padding: 2px 12px; }
+  h3 { margin: 0 0 4px; font-size: 18px; }
+  p { margin: 0; }
+  section { margin: 34px 0; }
+  .card { background: var(--paper); border-radius: 22px; box-shadow: var(--shadow); border: 3px solid #fff; padding: 18px 20px; }
+
+  /* 頁首 */
+  header.hero { text-align: center; padding: 28px 0 8px; }
+  .hero img.logo { width: min(520px, 90%); filter: drop-shadow(0 6px 0 rgba(35,57,91,.12)); }
+  .hero .kicker { display: inline-block; background: var(--ink); color: #fff; font-weight: 900; border-radius: 99px; padding: 4px 18px; margin-top: 6px; letter-spacing: .1em; }
+  .hero p.lead { font-size: clamp(17px, 2.2vw, 20px); font-weight: 700; max-width: 760px; margin: 14px auto 0; }
+  .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border: 0; cursor: pointer; font: inherit; font-weight: 900; font-size: 18px; padding: 12px 26px; border-radius: 99px; color: var(--ink); background: #fff; box-shadow: 0 5px 0 rgba(35,57,91,.2); }
+  .btn.sun { background: linear-gradient(#ffd35c, var(--sun)); color: #5a3300; box-shadow: 0 5px 0 #e8891a; }
+  .btn:hover { transform: translateY(-2px); }
+
+  /* 基本資料 */
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 26px; }
+  .fact { background: #fff; border-radius: 18px; padding: 12px 14px; text-align: center; box-shadow: 0 3px 0 rgba(35,57,91,.08); }
+  .fact b { display: block; font-size: 22px; font-weight: 900; }
+  .fact span { color: var(--soft); font-size: 14px; font-weight: 700; }
+
+  /* 目標 */
+  .goals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; counter-reset: g; }
+  .goal { position: relative; padding-top: 30px; }
+  .goal::before { counter-increment: g; content: counter(g); position: absolute; top: -14px; left: 18px; width: 36px; height: 36px; border-radius: 50%; background: var(--sun); color: #5a3300; font-weight: 900; display: grid; place-items: center; box-shadow: 0 3px 0 #e8891a; }
+  .goal p { color: var(--soft); font-size: 15px; }
+
+  /* 三區 */
+  .zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  .zone { border-radius: 18px; padding: 14px 16px; color: #fff; }
+  .zone.high { background: linear-gradient(135deg, #ff9472, var(--high)); }
+  .zone.ok { background: linear-gradient(135deg, #5fd6b0, var(--ok)); }
+  .zone.low { background: linear-gradient(135deg, #6ea4f3, var(--low)); }
+  .zone h3 { font-size: 19px; }
+  .zone p { font-size: 15px; opacity: .95; }
+
+  /* 事件流程 */
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 6px 0 18px; }
+  .step { position: relative; text-align: center; padding: 0 8px; }
+  .step .dot { width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 6px; background: #fff; border: 4px solid var(--sky); display: grid; place-items: center; font-weight: 900; font-size: 18px; position: relative; z-index: 1; }
+  .step:not(:last-child)::after { content: ""; position: absolute; top: 21px; left: 50%; width: 100%; height: 4px; background: #bfe2f3; }
+  .step b { display: block; font-size: 16px; }
+  .step span { font-size: 13.5px; color: var(--soft); display: block; line-height: 1.5; }
+
+  /* 技能、故事 */
+  .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .skill { display: flex; gap: 12px; align-items: flex-start; }
+  .skill img { width: 52px; height: 52px; flex: none; }
+  .skill p { font-size: 14.5px; color: var(--soft); }
+  .stories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .story { padding: 0; overflow: hidden; }
+  .story img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #d9f1fb; }
+  .story div { padding: 12px 16px 16px; }
+  .story .tag { display: inline-block; background: #d9f5e6; color: #1f7a4d; font-weight: 700; font-size: 13px; border-radius: 99px; padding: 0 10px; margin: 2px 4px 0 0; }
+  .story p { font-size: 14.5px; color: var(--soft); margin-top: 4px; }
+
+  /* 截圖 */
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; border-radius: 16px; box-shadow: var(--shadow); border: 3px solid #fff; display: block; aspect-ratio: 16/10; object-fit: cover; }
+  .shots figcaption { text-align: center; font-size: 14px; font-weight: 700; color: var(--soft); margin-top: 6px; }
+
+  /* 教學流程 */
+  .lesson { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .phase { border-top: 8px solid var(--sky); }
+  .phase .time { float: right; background: var(--ink); color: #fff; font-weight: 900; font-size: 14px; border-radius: 99px; padding: 1px 12px; }
+  .phase p { font-size: 15px; }
+  .phase .q { margin-top: 10px; background: #fff4d6; border-radius: 12px; padding: 8px 12px; font-size: 14.5px; font-weight: 700; }
+  .phase:nth-child(2) { border-top-color: var(--ok); }
+  .phase:nth-child(3) { border-top-color: var(--sun); }
+  .tips { margin: 14px 0 0; padding-left: 1.2em; }
+  .tips li { margin: 4px 0; }
+  .note { background: #f0fff7; border-left: 6px solid var(--ok); border-radius: 12px; padding: 10px 14px; font-weight: 700; margin-top: 14px; }
+
+  footer { text-align: center; color: var(--soft); font-size: 14px; padding: 20px 0 36px; }
+
+  @media (max-width: 860px) {
+    .facts, .goals, .skills { grid-template-columns: repeat(2, 1fr); }
+    .zones, .stories, .shots, .lesson { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; gap: 10px; }
+    .step { display: grid; grid-template-columns: 46px 1fr; gap: 0 12px; text-align: left; align-items: center; }
+    .step .dot { grid-row: span 2; margin: 0; }
+    .step:not(:last-child)::after { display: none; }
+  }
+  @media print {
+    body { background: #fff; font-size: 12px; line-height: 1.5; }
+    .actions, .shots-sec { display: none; }
+    section { margin: 14px 0; break-inside: avoid; }
+    .card, .fact { box-shadow: none; border: 1px solid #dde5ee; }
+    .hero img.logo { width: 300px; }
+    .zone, .phase, .story img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <img class="logo" src="assets/svg/logo.svg" alt="OK 曲線衝浪：我的校園一天">
+    <div><span class="kicker">教師說明</span></div>
+    <p class="lead">學生乘著代表情緒激發程度的「OK 曲線」衝浪，在校園一天的六個事件中練習辨識情緒、覺察身體訊號，並選用調節策略，回到可以思考與行動的狀態。</p>
+    <div class="actions">
+      <a class="btn sun" href="index.html">開始遊戲</a>
+      <button class="btn" id="btn-print" type="button">列印這一頁</button>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>國小 4–6 年級</b><span>適用年級</span></div>
+      <div class="fact"><b>1 節課 40 分</b><span>教學時間</span></div>
+      <div class="fact"><b>7–10 分鐘</b><span>每人玩 1 個故事</span></div>
+      <div class="fact"><b>免安裝・免登入</b><span>電腦、平板、手機瀏覽器</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="no">單元</span>單元資訊</h2>
+    <div class="card">
+      <p><b>單元名稱：</b>OK 曲線衝浪：我的校園一天　<b>學習領域：</b>社會情緒學習（SEL），可融入綜合活動、健康教育</p>
+      <p><b>SEL 核心能力：</b>自我覺察、自我管理、人際技巧、負責任的決定　<b>分組：</b>個人或兩人一組；不需輸入任何個人資料</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">目標</span>學習目標</h2>
+    <div class="goals">
+      <div class="card goal"><h3>辨識情緒</h3><p>說出自己在事件中的情緒，理解同一件事每個人的感受可以不同。</p></div>
+      <div class="card goal"><h3>覺察身體訊號</h3><p>連結情緒與心跳、呼吸、肩膀等線索，判斷自己在哪一個區域。</p></div>
+      <div class="card goal"><h3>選用調節策略</h3><p>操作至少一種調節技能，並評估它對自己有沒有幫助。</p></div>
+      <div class="card goal"><h3>做出合宜行動</h3><p>在挑戰、衝突或意外中，選擇尊重、安全的回應，並清楚地求助。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">玩法</span>遊戲玩法</h2>
+    <div class="zones">
+      <div class="zone high"><h3>高激發區</h3><p>能量很多：興奮、期待，也可能是緊張、生氣。高激發不等於壞情緒。</p></div>
+      <div class="zone ok"><h3>復原力區 OK Zone</h3><p>還能思考、學習、和別人互動。復原力不是一直開心。</p></div>
+      <div class="zone low"><h3>低激發區</h3><p>能量變少：失落、累、想躲起來。低激發不等於失敗。</p></div>
+    </div>
+    <div class="card">
+      <h3>每個故事有 6 個事件，每個事件這樣進行：</h3>
+      <div class="flow">
+        <div class="step"><div class="dot">1</div><b>閱讀情境</b><span>部分事件有衝浪挑戰，做不好不扣分</span></div>
+        <div class="step"><div class="dot">2</div><b>選情緒與身體訊號</b><span>情緒單選、身體訊號可複選</span></div>
+        <div class="step"><div class="dot">3</div><b>波浪變化</b><span>情緒精靈先接納感受</span></div>
+        <div class="step"><div class="dot">4</div><b>調節技能</b><span>自己決定要不要用，用完自評</span></div>
+        <div class="step"><div class="dot">5</div><b>選擇行動</b><span>看到同學或老師的回應</span></div>
+      </div>
+      <div class="skills">
+        <div class="skill"><img src="assets/svg/skill-breath.svg" alt=""><div><h3>呼吸光圈</h3><p>光圈變大時按住吸氣、變小時放開吐氣，完成 3 次。</p></div></div>
+        <div class="skill"><img src="assets/svg/skill-harbor.svg" alt=""><div><h3>安全港停靠</h3><p>按住煞車慢慢靠港，再選身體部位與休息方式。</p></div></div>
+        <div class="skill"><img src="assets/svg/skill-island.svg" alt=""><div><h3>支持浮島</h3><p>選支持者，組出「打招呼＋感受＋需要的幫忙」的求助句。</p></div></div>
+        <div class="skill"><img src="assets/svg/skill-puzzle.svg" alt=""><div><h3>想法拼圖</h3><p>把過度概括的想法，拼成比較平衡的說法。</p></div></div>
+      </div>
+    </div>
+    <div class="stories">
+      <div class="card story"><img src="assets/svg/card-sports-day.svg" alt=""><div><h3>運動會的一天</h3><span class="tag">挫折</span><span class="tag">團隊合作</span><p>接力賽掉棒、同學反應不同，練習面對失誤。</p></div></div>
+      <div class="card story"><img src="assets/svg/card-exam-day.svg" alt=""><div><h3>考試的一天</h3><span class="tag">壓力</span><span class="tag">自我接納</span><p>遇到不會的難題、對答案比較，練習調整策略。</p></div></div>
+      <div class="card story"><img src="assets/svg/card-field-trip.svg" alt=""><div><h3>校外教學的一天</h3><span class="tag">人際互動</span><span class="tag">尋求支持</span><p>小組意見不合、與隊伍走散，練習安全求助。</p></div></div>
+    </div>
+    <p class="note">玩完會產生「我的 OK 曲線」：六個事件的情緒曲線、紀錄與復原力工具卡，可存成 PNG。不以情緒高低或是否待在綠色區評分。</p>
+  </section>
+
+  <section class="shots-sec">
+    <h2><span class="no">畫面</span>遊戲畫面</h2>
+    <div class="shots">
+      <figure><img src="assets/img/shot-surf.jpg" alt="衝浪畫面"><figcaption>情緒波浪衝浪</figcaption></figure>
+      <figure><img src="assets/img/shot-event.jpg" alt="事件與情緒選擇"><figcaption>事件與情緒辨識</figcaption></figure>
+      <figure><img src="assets/img/shot-result.jpg" alt="我的 OK 曲線"><figcaption>我的 OK 曲線</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">教學</span>教學方式（40 分鐘）</h2>
+    <div class="lesson">
+      <div class="card phase"><span class="time">8 分</span><h3>引起動機</h3><p>在黑板畫一條起伏的線，介紹三個區域；示範遊戲操作。</p><div class="q">「你最近什麼時候心跳很快？那時是開心還是緊張？」</div></div>
+      <div class="card phase"><span class="time">20 分</span><h3>遊戲體驗</h3><p>學生自選 1 個故事玩完；老師巡視，協助操作與閱讀。</p><div class="q">「你選了哪個技能？為什麼想試它？」</div></div>
+      <div class="card phase"><span class="time">12 分</span><h3>分享總結</h3><p>小組對照彼此的 OK 曲線；每人寫下 1 個「下次想試的方法」。</p><div class="q">「同一個事件，為什麼大家的曲線不一樣？」</div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>教學提醒</h3>
+      <ul class="tips">
+        <li>情緒數值只是遊戲模擬，不是心理測驗，不用曲線比較或評分學生。</li>
+        <li>強調「每種感受都可以被接納」；復原力是能慢慢回到可以應對的狀態。</li>
+        <li>若學生持續顯示強烈的不舒服，請私下關心，並視需要轉介輔導老師。</li>
+        <li>需要安靜環境的學生，可開啟「降低動畫」或關閉音效；也可用數字鍵選擇。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>OK 曲線衝浪：我的校園一天｜所有程式、美術與音效皆為原創，純前端網頁，不蒐集任何個人資料。</footer>
+</div>
+<script>
+  // 列印：在不允許列印的嵌入環境（例如預覽框）中隱藏按鈕，避免無效按鈕
+  (function () {
+    var b = document.getElementById('btn-print');
+    var embedded = false;
+    try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+    if (embedded || !window.print) { b.style.display = 'none'; return; }
+    b.addEventListener('click', function () { window.print(); });
+  })();
+</script>
+</body>
+</html>
