@@ -12,28 +12,6 @@
 
 ---
 
-## 快速開始
-
-**方法一：直接開啟**
-把整個資料夾下載後，直接用瀏覽器打開 `index.html` 就能玩。
-
-**方法二：本機伺服器（建議）**
-```bash
-cd ok-surf
-python3 -m http.server 8000
-# 瀏覽器開啟 http://localhost:8000
-```
-
-**部署到 GitHub Pages**
-1. 把整個資料夾推到一個 GitHub repository。
-2. Settings → Pages → Source 選 `main` 分支、根目錄 `/`。
-3. 等一分鐘後就會得到網址。
-
-**部署到 Netlify**
-把資料夾直接拖曳到 <https://app.netlify.com/drop> 即可。沒有建置步驟。
-
----
-
 ## 遊戲內容
 
 ### 核心玩法
