@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="OK 曲線衝浪：我的校園一天 — 給國小四到六年級學生的社會情緒學習（SEL）衝浪遊戲">
+<meta name="theme-color" content="#5cc8e8">
+<title>OK 曲線衝浪：我的校園一天</title>
+<link rel="icon" href="assets/svg/badge-resilience.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- 主畫布：首頁背景與衝浪場景共用 -->
+<canvas id="scene" aria-label="情緒波浪衝浪畫面"></canvas>
+
+<!-- ===== 首頁 ===== -->
+<section id="screen-title" class="screen active" aria-label="遊戲首頁">
+  <div class="title-wrap">
+    <img class="logo" src="assets/svg/logo.svg" alt="OK 曲線衝浪：我的校園一天">
+    <p class="subtitle">乘著情緒的波浪，找到自己的復原力！</p>
+    <div class="title-buttons">
+      <button class="btn btn-big btn-sun" id="btn-start"><span class="btn-ico"></span>開始遊戲</button>
+      <button class="btn btn-sky" id="btn-help"><span class="btn-ico"></span>遊戲說明</button>
+    </div>
+    <div class="title-toggles">
+      <button class="toggle" id="tg-sound" aria-pressed="true"><span class="tg-dot"></span><span class="tg-label">音效：開</span></button>
+      <button class="toggle" id="tg-motion" aria-pressed="false"><span class="tg-dot"></span><span class="tg-label">降低動畫：關</span></button>
+    </div>
+  </div>
+  <p class="foot-note">情緒數值只用於遊戲模擬，不代表你真實的心理狀態。</p>
+</section>
+
+<!-- ===== 說明 ===== -->
+<section id="screen-help" class="modal" aria-label="遊戲說明" hidden>
+  <div class="modal-card">
+    <h2>📖 遊戲說明</h2>
+    <div class="help-grid">
+      <div class="help-item">
+        <div class="zone-chip high">高激發區</div>
+        <p>心跳快、能量多。可能是<b>興奮、期待</b>，也可能是<b>緊張、生氣</b>。高激發不等於壞情緒！</p>
+      </div>
+      <div class="help-item">
+        <div class="zone-chip ok">復原力區 OK Zone</div>
+        <p>還能思考、學習、和別人互動。復原力不是一直開心，而是<b>能慢慢回到可以應對的狀態</b>。</p>
+      </div>
+      <div class="help-item">
+        <div class="zone-chip low">低激發區</div>
+        <p>能量變少。可能是<b>失落、累、想躲起來</b>。低激發不等於失敗，也需要被照顧。</p>
+      </div>
+    </div>
+    <h3>怎麼玩</h3>
+    <ul class="help-list">
+      <li>角色會在你的<b>情緒波浪</b>上自動衝浪。按 <kbd>空白鍵</kbd>、<kbd>↑</kbd> 或<b>點一下畫面</b>就能跳起來收集光點。</li>
+      <li>遇到事件時，選出你的<b>心情</b>和<b>身體訊號</b>，波浪會跟著改變。每個人的感受都可以不一樣。</li>
+      <li>需要的時候，可以使用四種<b>調節技能</b>：呼吸光圈、安全港停靠、支持浮島、想法拼圖。</li>
+      <li>有些事件有衝浪挑戰：跟節奏、保持平衡、收集發現。做不好也不會扣分，慢慢來就好。</li>
+      <li>選項可以用滑鼠、觸控，或數字鍵 <kbd>1</kbd>～<kbd>9</kbd> 選擇；<kbd>Enter</kbd> 確認。</li>
+    </ul>
+    <p class="help-note">這個遊戲沒有分數排名，不需要一直待在綠色區。我們想練習的是：<b>認識自己的波浪，並找到照顧自己的方法。</b></p>
+    <button class="btn btn-sun" data-close>我知道了！</button>
+  </div>
+</section>
+
+<!-- ===== 故事選擇 ===== -->
+<section id="screen-select" class="screen" aria-label="選擇故事">
+  <header class="select-head">
+    <button class="btn btn-ghost btn-small" id="btn-select-back">← 首頁</button>
+    <h2>選擇今天的校園故事</h2>
+    <div class="avatar-pick" role="radiogroup" aria-label="選擇角色">
+      <span class="avatar-label">我的角色</span>
+      <button class="avatar-btn selected" data-avatar="girl" role="radio" aria-checked="true"><canvas width="96" height="96"></canvas><span>女生</span></button>
+      <button class="avatar-btn" data-avatar="boy" role="radio" aria-checked="false"><canvas width="96" height="96"></canvas><span>男生</span></button>
+    </div>
+  </header>
+  <div class="cards">
+    <button class="story-card" data-story="sports">
+      <img src="assets/svg/card-sports-day.svg" alt="">
+      <div class="card-body">
+        <span class="card-tag">故事一</span>
+        <h3>運動會的一天</h3>
+        <p>接力賽要開始了！期待、失誤和隊友的反應，你會怎麼乘著波浪前進？</p>
+        <div class="card-themes"><span>挫折</span><span>團隊合作</span><span>復原力</span></div>
+      </div>
+    </button>
+    <button class="story-card" data-story="exam">
+      <img src="assets/svg/card-exam-day.svg" alt="">
+      <div class="card-body">
+        <span class="card-tag">故事二</span>
+        <h3>考試的一天</h3>
+        <p>準備好了，卻聽到沒複習過的題型……壓力來的時候，可以試試哪些方法？</p>
+        <div class="card-themes"><span>壓力</span><span>自我接納</span><span>調整策略</span></div>
+      </div>
+    </button>
+    <button class="story-card" data-story="trip">
+      <img src="assets/svg/card-field-trip.svg" alt="">
+      <div class="card-body">
+        <span class="card-tag">故事三</span>
+        <h3>校外教學的一天</h3>
+        <p>出發去博物館！意見不合、和隊伍走散，你要怎麼照顧自己、尋求支持？</p>
+        <div class="card-themes"><span>人際互動</span><span>意外事件</span><span>尋求支持</span></div>
+      </div>
+    </button>
+  </div>
+</section>
+
+<!-- ===== 遊戲 HUD ===== -->
+<div id="hud" hidden>
+  <div class="hud-top">
+    <div class="hud-story"><span id="hud-title">故事</span><span id="hud-clock">07:40</span></div>
+    <div class="hud-progress" id="hud-progress" aria-label="事件進度"></div>
+    <div class="hud-right">
+      <span class="hud-sparks" title="收集到的光點">✨ <b id="hud-sparks">0</b></span>
+      <button class="icon-btn" id="btn-pause" aria-label="暫停選單">⏸</button>
+    </div>
+  </div>
+  <div class="hud-hint" id="hud-hint"></div>
+  <div class="hud-banner" id="hud-banner" aria-live="polite"></div>
+  <div class="touch-controls" id="touch-balance" hidden>
+    <button class="touch-btn" id="tc-left" aria-label="向左平衡">◀</button>
+    <button class="touch-btn" id="tc-right" aria-label="向右平衡">▶</button>
+  </div>
+  <button class="touch-jump" id="tc-jump" aria-label="跳起來">跳！</button>
+</div>
+
+<!-- ===== 事件面板 ===== -->
+<section id="panel" class="panel" hidden aria-live="polite">
+  <div class="panel-card">
+    <div class="panel-scene">
+      <canvas id="scene-art" width="760" height="300"></canvas>
+      <div class="scene-tag" id="scene-tag">事件 1｜早上到校</div>
+    </div>
+    <div class="panel-body" id="panel-body"></div>
+  </div>
+</section>
+
+<!-- ===== 小遊戲 ===== -->
+<section id="minigame" class="modal mg" hidden aria-label="調節技能小遊戲">
+  <div class="modal-card mg-card">
+    <header class="mg-head">
+      <img id="mg-icon" src="" alt="">
+      <div><h2 id="mg-title">技能</h2><p id="mg-desc"></p></div>
+    </header>
+    <div class="mg-body" id="mg-body"></div>
+  </div>
+</section>
+
+<!-- ===== 暫停選單 ===== -->
+<section id="pause" class="modal" hidden aria-label="暫停選單">
+  <div class="modal-card small">
+    <h2>⏸ 暫停一下</h2>
+    <button class="btn btn-sun" id="btn-resume">繼續遊戲</button>
+    <button class="toggle wide" id="tg-sound-2" aria-pressed="true"><span class="tg-dot"></span><span class="tg-label">音效：開</span></button>
+    <button class="toggle wide" id="tg-motion-2" aria-pressed="false"><span class="tg-dot"></span><span class="tg-label">降低動畫：關</span></button>
+    <button class="btn btn-ghost" id="btn-quit">回到故事選單</button>
+  </div>
+</section>
+
+<!-- ===== 結果 ===== -->
+<section id="screen-result" class="screen scroll" aria-label="我的 OK 曲線">
+  <div class="result-wrap">
+    <header class="result-head">
+      <img src="assets/svg/badge-resilience.svg" alt="復原力徽章" class="result-badge">
+      <div>
+        <p class="result-kicker">今日故事｜<span id="res-story"></span></p>
+        <h2>我的 OK 曲線</h2>
+      </div>
+    </header>
+    <div class="result-chart"><canvas id="res-chart" width="900" height="380"></canvas></div>
+    <p class="result-feedback" id="res-feedback"></p>
+    <h3 class="res-h">📍 六個事件的情緒紀錄</h3>
+    <div class="res-events" id="res-events"></div>
+    <div class="res-two">
+      <div class="res-box">
+        <h3 class="res-h">🧰 我用過的調節技能</h3>
+        <div class="res-skills" id="res-skills"></div>
+      </div>
+      <div class="res-box toolcard">
+        <h3 class="res-h">🌊 我的復原力工具卡</h3>
+        <ul id="res-tools"></ul>
+      </div>
+    </div>
+    <div class="result-buttons">
+      <button class="btn btn-sun" id="btn-png">產生學習成果卡</button>
+      <button class="btn btn-sky" id="btn-replay">重新遊玩</button>
+      <button class="btn btn-ghost" id="btn-menu">返回故事選單</button>
+    </div>
+    <p class="foot-note dark">曲線是依照你在遊戲中的選擇模擬出來的，只是學習紀錄，不是心理測驗，也沒有好壞名次。</p>
+  </div>
+</section>
+
+<!-- ===== 成果卡圖片 ===== -->
+<section id="png-modal" class="modal" hidden aria-label="學習成果卡">
+  <div class="modal-card">
+    <h2>我的學習成果卡</h2>
+    <img id="png-img" alt="學習成果卡" class="png-img">
+    <p class="help-note">如果沒有自動下載：電腦請在圖片上按右鍵「另存圖片」，平板或手機請長按圖片儲存。</p>
+    <div class="result-buttons">
+      <button class="btn btn-sun" id="btn-png-dl">⬇下載 PNG</button>
+      <button class="btn btn-ghost" data-close>關閉</button>
+    </div>
+  </div>
+</section>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/audio.js"></script>
+<script src="js/art.js"></script>
+<script src="js/stories.js"></script>
+<script src="js/surf.js"></script>
+<script src="js/minigames.js"></script>
+<script src="js/results.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#fff5e0"/>
+  <rect y="210" width="400" height="90" fill="#e9c99a"/>
+  <!-- 黑板 -->
+  <rect x="40" y="30" width="250" height="120" rx="8" fill="#2f6b55" stroke="#8a5a2b" stroke-width="8"/>
+  <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9">
+    <path d="M64 64 h50 M64 84 h80 M64 104 h40"/><path d="M180 60 l14 14 l22 -26"/><circle cx="230" cy="110" r="14"/>
+  </g>
+  <text x="165" y="138" font-family="Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif" font-weight="900" font-size="18" fill="#fff" opacity=".9">加油！</text>
+  <!-- 時鐘 -->
+  <circle cx="340" cy="70" r="34" fill="#fff" stroke="#23395b" stroke-width="4"/>
+  <path d="M340 70 V46 M340 70 L358 80" stroke="#23395b" stroke-width="4" stroke-linecap="round"/>
+  <!-- 窗 -->
+  <rect x="310" y="120" width="70" height="70" rx="6" fill="#bfe9f7" stroke="#23395b" stroke-width="3"/>
+  <path d="M345 120 V190 M310 155 H380" stroke="#23395b" stroke-width="3"/>
+  <!-- 書桌 -->
+  <path d="M60 200 H340 L350 222 H50z" fill="#d79b5c" stroke="#23395b" stroke-width="3"/>
+  <rect x="140" y="178" width="110" height="34" rx="3" fill="#fff" stroke="#23395b" stroke-width="2.5" transform="rotate(-6 195 195)"/>
+  <g stroke="#9fb1c4" stroke-width="2.5" transform="rotate(-6 195 195)"><path d="M152 188 h80 M152 196 h60 M152 204 h70"/></g>
+  <!-- 學生 -->
+  <g transform="translate(110 150)">
+    <circle cx="0" cy="0" r="34" fill="#ffe2c6" stroke="#23395b" stroke-width="3"/>
+    <path d="M-34 -2 C-38 -46 38 -46 34 -2 C34 -16 18 -30 -2 -26 C-16 -24 -30 -16 -34 -2z" fill="#4a3226" stroke="#23395b" stroke-width="3"/>
+    <path d="M28 -14 C46 -8 48 20 36 30" stroke="#4a3226" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <circle cx="-11" cy="4" r="4.5" fill="#23395b"/><circle cx="12" cy="4" r="4.5" fill="#23395b"/>
+    <path d="M-5 18 q5 -4 10 0" stroke="#23395b" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M30 -14 q4 8 0 12 q-4 -4 0 -12z" fill="#7fd3f5"/>
+    <path d="M-30 34 h60 v30 h-60z" fill="#fff" stroke="#23395b" stroke-width="3"/>
+  </g>
+  <!-- 鉛筆 -->
+  <g transform="translate(270 168) rotate(35)">
+    <rect x="0" y="0" width="60" height="12" rx="2" fill="#ffd35c" stroke="#23395b" stroke-width="2.5"/>
+    <path d="M60 0 l14 6 l-14 6z" fill="#ffe2c6" stroke="#23395b" stroke-width="2.5"/>
+    <rect x="-10" y="0" width="10" height="12" fill="#ff9ec4" stroke="#23395b" stroke-width="2.5"/>
+  </g>
+  <!-- 想法泡泡 -->
+  <g fill="#fff" stroke="#23395b" stroke-width="2.5">
+    <circle cx="170" cy="128" r="5"/><circle cx="184" cy="114" r="8"/>
+    <ellipse cx="226" cy="96" rx="36" ry="22"/>
+  </g>
+  <text x="226" y="106" text-anchor="middle" font-size="28" font-weight="900" fill="#ff7a59" font-family="Arial Black, sans-serif">?!</text>
+</svg>
