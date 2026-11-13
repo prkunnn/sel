@@ -69,6 +69,7 @@ button { font-family: inherit; color: inherit; }
   box-shadow: 0 3px 0 rgba(35, 57, 91, .2);
 }
 .toggle.wide { width: 100%; justify-content: center; }
+a.toggle { text-decoration: none; color: inherit; }
 .tg-dot { width: 36px; height: 20px; border-radius: 99px; background: #c9d3df; position: relative; transition: background .2s; flex: none; }
 .tg-dot::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: left .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
 .toggle[aria-pressed="true"] .tg-dot { background: var(--ok); }
