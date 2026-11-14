@@ -115,6 +115,38 @@
     .hero img.logo { width: 300px; }
     .zone, .phase, .story img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+
+  /* 評分對照與新版區塊 */
+  .rubric { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  .rubric a { text-decoration: none; color: #fff; border-radius: 18px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; box-shadow: 0 4px 0 rgba(35,57,91,.2); }
+  .rubric a:nth-child(1) { background: linear-gradient(135deg, #7a5bd6, #5b3fb8); }
+  .rubric a:nth-child(2) { background: linear-gradient(135deg, #4fb8e6, #2a8ec2); }
+  .rubric a:nth-child(3) { background: linear-gradient(135deg, #3fbf7f, #2b9762); }
+  .rubric a span { font-weight: 900; font-size: 22px; }
+  .rubric a:hover { transform: translateY(-2px); }
+  .part { margin: 46px 0 -6px; font-size: clamp(24px, 3.4vw, 32px); font-weight: 900; display: flex; align-items: center; gap: 12px; border-bottom: 4px solid #fff; padding-bottom: 6px; }
+  .part span { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 22px; flex: none; }
+  .mt { margin-top: 10px; }
+  .mt14 { margin-top: 14px; }
+  .small { font-size: 13.5px; color: var(--soft); margin-top: 10px; }
+  .zones { margin: 14px 0; }
+  .table-card { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid #e3ecf4; }
+  th { background: #eef6fb; font-weight: 900; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  .fit { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .fit p { font-size: 14.5px; color: var(--soft); }
+  .process p { margin: 4px 0; }
+  .pgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+  .pgrid div { background: #fff; border-radius: 16px; padding: 12px; text-align: center; box-shadow: 0 3px 0 rgba(35,57,91,.08); }
+  .pgrid b { display: block; font-size: 26px; color: #2b9762; }
+  .pgrid span { font-size: 13.5px; color: var(--soft); font-weight: 700; }
+  .actions.left { justify-content: flex-start; margin-top: 10px; }
+  footer a { color: var(--ink); }
+  @media (max-width: 860px) { .rubric, .fit, .pgrid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .rubric { grid-template-columns: 1fr; } }
+  @media print { .rubric a { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .part { break-after: avoid; } }
 </style>
 </head>
 <body>
@@ -122,24 +154,69 @@
   <header class="hero">
     <img class="logo" src="assets/svg/logo.svg" alt="OK 曲線衝浪：我的校園一天">
     <div><span class="kicker">教師說明</span></div>
-    <p class="lead">學生乘著代表情緒激發程度的「OK 曲線」衝浪，在校園一天的六個事件中練習辨識情緒、覺察身體訊號，並選用調節策略，回到可以思考與行動的狀態。</p>
+    <p class="lead">學生乘著代表情緒激發程度的「OK 曲線」衝浪，在校園一天的六個事件中練習辨識情緒、覺察身體訊號、選用調節策略，並為自己的行動做選擇。</p>
     <div class="actions">
       <a class="btn sun" href="index.html">開始遊戲</a>
+      <a class="btn" href="ai-process.html">AI 歷程與材料包</a>
       <button class="btn" id="btn-print" type="button">列印這一頁</button>
     </div>
     <div class="facts">
       <div class="fact"><b>國小 4–6 年級</b><span>適用年級</span></div>
       <div class="fact"><b>1 節課 40 分</b><span>教學時間</span></div>
       <div class="fact"><b>7–10 分鐘</b><span>每人玩 1 個故事</span></div>
-      <div class="fact"><b>免登入</b><span>電腦、平板、手機</span></div>
+      <div class="fact"><b>免安裝・免登入</b><span>電腦、平板、手機瀏覽器</span></div>
+    </div>
+    <div class="rubric">
+      <a href="#concept"><b>設計理念與適用對象</b><span>→</span></a>
+      <a href="#interaction"><b>遊戲互動與教學應用</b><span>→</span></a>
+      <a href="#process"><b>開發歷程</b><span>→</span></a>
     </div>
   </header>
 
+  <!-- ================= 一、概念與適用性 ================= -->
+  <div class="part" id="concept"><span>一</span>設計理念與適用對象</div>
+
   <section>
-    <h2><span class="no">單元</span>單元資訊</h2>
+    <h2><span class="no">理念</span>設計理念</h2>
     <div class="card">
-      <p><b>單元名稱：</b>OK 曲線衝浪：我的校園一天　<b>學習領域：</b>社會情緒學習（SEL），可融入綜合活動、健康教育</p>
-      <p><b>SEL 核心能力：</b>自我覺察、自我管理、人際技巧、負責任的決定　<b>分組：</b>個人或兩人一組；不需輸入任何個人資料</p>
+      <p>國小中高年級的情緒經驗越來越多元，比賽、考試、同儕衝突與新環境都會帶來強烈感受，但學生常只能說出「開心」或「生氣」，也不知道情緒升高或低落時可以怎麼辦。本作品把抽象的「情緒調節」變成一條看得見、摸得到的波浪：學生的選擇會讓波浪升高或降低，再透過實際操作的小遊戲，練習讓自己回到可以思考與行動的狀態。</p>
+      <p class="mt"><b>概念依據：</b>OK 曲線的三個區域，改編自心理學中的「容納之窗」（Window of Tolerance，Siegel, 1999）與「復原力區」（Zone of Resilience）概念：人在一定的激發範圍內，最能有效思考與回應；超出範圍時會變得過度緊繃（高激發）或過度低落、麻木（低激發）。本作品把它轉化成國小學生能理解的語言與畫面，作為教學引導，不是臨床或診斷工具。</p>
+    </div>
+    <div class="zones">
+      <div class="zone high"><h3>高激發區</h3><p>能量很多：興奮、期待，也可能是緊張、生氣。高激發不等於壞情緒。</p></div>
+      <div class="zone ok"><h3>復原力區 OK Zone</h3><p>還能思考、學習、和別人互動。復原力不是一直開心，而是能慢慢回到這裡。</p></div>
+      <div class="zone low"><h3>低激發區</h3><p>能量變少：失落、累、想躲起來。低激發不等於失敗，也需要被照顧。</p></div>
+    </div>
+    <div class="card">
+      <h3>三個核心設計原則</h3>
+      <ul class="tips">
+        <li><b>情緒與激發程度分開處理：</b>「興奮」和「焦慮」都在高激發區，但感受不同。學生先選情緒，再選身體訊號，兩者一起決定波浪高度，所以每個人的曲線都不一樣。</li>
+        <li><b>先接納，再調節：</b>每次選完情緒，情緒精靈「浪浪」都會先接納感受，再邀請學生選擇要不要使用調節技能；不要求否認感受，也不強迫正向思考。</li>
+        <li><b>不以情緒評分：</b>沒有分數與排名，也不要求永遠待在綠色區。重點是認識自己的波浪，並找到照顧自己的方法。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">SEL</span>對應 SEL 五大核心能力（CASEL）</h2>
+    <div class="card table-card"><table>
+      <tr><th>核心能力</th><th>遊戲中怎麼練習</th><th>例子</th></tr>
+      <tr><td><b>自我覺察</b></td><td>每個事件選出自己的情緒與身體訊號，看見波浪的變化</td><td>接力賽前：選「緊張」＋「心跳變快、手心冒汗」</td></tr>
+      <tr><td><b>自我管理</b></td><td>四種可操作的調節技能，用完自評有沒有幫助</td><td>考試卡關：停靠安全港，暫停一下、喝口水</td></tr>
+      <tr><td><b>社會覺察</b></td><td>同一事件中，不同同學有不同反應與感受</td><td>掉棒後：阿哲失望、美美鼓勵、小安關心</td></tr>
+      <tr><td><b>人際技巧</b></td><td>組出清楚、尊重的求助句；練習表達感受與需求</td><td>支持浮島：「老師，可以跟你說一下話嗎？……」</td></tr>
+      <tr><td><b>負責任的決定</b></td><td>行動選擇帶來不同回應；安全情境要選安全做法</td><td>與隊伍走散：找穿制服的館員，不自己亂跑</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2><span class="no">課綱</span>對應十二年國教課綱</h2>
+    <div class="card table-card"><table>
+      <tr><th>領域</th><th>核心素養</th><th>學習表現</th><th>學習內容</th><th>對應遊戲內容</th></tr>
+      <tr><td><b>綜合活動</b></td><td>綜-E-C2</td><td>1d-II-1 覺察情緒的變化，培養正向思考的態度</td><td>Ad-II-1 情緒的辨識與調適<br>Ba-III-3 正向人際關係與衝突解決能力的建立</td><td>情緒辨識、想法拼圖、小組意見不合事件</td></tr>
+      <tr><td><b>健康與體育</b></td><td>健體-E-C2</td><td>3b-II-1 透過模仿學習，表現基本的自我調適技能<br>3b-III-1 獨立演練大部分的自我調適技能</td><td>Fa-II-3 情緒的類型與調適方法<br>Fa-III-4 正向態度與情緒、壓力的管理技巧</td><td>呼吸光圈、安全港停靠、考試壓力情境</td></tr>
+    </table>
+    <p class="small">條目依各校公開課程計畫整理，送件前請以教育部課綱原文再核對一次。也可融入生命教育、安全教育（走散時的求助方式）等議題。</p>
     </div>
   </section>
 
@@ -154,42 +231,72 @@
   </section>
 
   <section>
-    <h2><span class="no">玩法</span>遊戲玩法</h2>
-    <div class="zones">
-      <div class="zone high"><h3>高激發區</h3><p>能量很多：興奮、期待，也可能是緊張、生氣。高激發不等於壞情緒。</p></div>
-      <div class="zone ok"><h3>復原力區 OK Zone</h3><p>還能思考、學習、和別人互動。復原力不是一直開心。</p></div>
-      <div class="zone low"><h3>低激發區</h3><p>能量變少：失落、累、想躲起來。低激發不等於失敗。</p></div>
-    </div>
-    <div class="card">
-      <h3>每個故事有 6 個事件，每個事件這樣進行：</h3>
-      <div class="flow">
-        <div class="step"><div class="dot">1</div><b>閱讀情境</b><span>部分事件有衝浪挑戰，做不好不扣分</span></div>
-        <div class="step"><div class="dot">2</div><b>選情緒與身體訊號</b><span>情緒單選、身體訊號可複選</span></div>
-        <div class="step"><div class="dot">3</div><b>波浪變化</b><span>情緒精靈先接納感受</span></div>
-        <div class="step"><div class="dot">4</div><b>調節技能</b><span>自己決定要不要用，用完自評</span></div>
-        <div class="step"><div class="dot">5</div><b>選擇行動</b><span>看到同學或老師的回應</span></div>
-      </div>
-      <div class="skills">
-        <div class="skill"><img src="assets/svg/skill-breath.svg" alt=""><div><h3>呼吸光圈</h3><p>光圈變大時按住吸氣、變小時放開吐氣，完成 3 次。</p></div></div>
-        <div class="skill"><img src="assets/svg/skill-harbor.svg" alt=""><div><h3>安全港停靠</h3><p>按住煞車慢慢靠港，再選身體部位與休息方式。</p></div></div>
-        <div class="skill"><img src="assets/svg/skill-island.svg" alt=""><div><h3>支持浮島</h3><p>選支持者，組出「打招呼＋感受＋需要的幫忙」的求助句。</p></div></div>
-        <div class="skill"><img src="assets/svg/skill-puzzle.svg" alt=""><div><h3>想法拼圖</h3><p>把過度概括的想法，拼成比較平衡的說法。</p></div></div>
-      </div>
+    <h2><span class="no">適用</span>適用性</h2>
+    <div class="fit">
+      <div class="card"><h3>符合學生生活經驗</h3><p>三個故事都是國小中高年級常見的校園情境，由輕鬆到挑戰，有起承轉合；每個事件的角色、對話與選項都貼近學生日常。</p></div>
+      <div class="card"><h3>容易在課堂實施</h3><p>一節課 40 分鐘可完成；用學校的電腦或平板開網頁就能玩，免安裝、免登入、免付費，可個人或兩人一組。</p></div>
+      <div class="card"><h3>照顧不同需求</h3><p>可關閉音效、開啟「降低動畫」；呼吸光圈有較慢節奏；支援滑鼠、鍵盤與觸控；每個技能都能跳過；操作失敗不扣分。</p></div>
+      <div class="card"><h3>安全與隱私</h3><p>不需輸入任何個人資料；情緒數值只是遊戲模擬，不是心理測驗；走散事件示範安全求助，選擇不安全做法會溫和提醒並重新選擇。</p></div>
     </div>
     <div class="stories">
-      <div class="card story"><img src="assets/svg/card-sports-day.svg" alt=""><div><h3>運動會的一天</h3><span class="tag">挫折</span><span class="tag">團隊合作</span><p>接力賽掉棒、同學反應不同，練習面對失誤。</p></div></div>
-      <div class="card story"><img src="assets/svg/card-exam-day.svg" alt=""><div><h3>考試的一天</h3><span class="tag">壓力</span><span class="tag">自我接納</span><p>遇到不會的難題、對答案比較，練習調整策略。</p></div></div>
-      <div class="card story"><img src="assets/svg/card-field-trip.svg" alt=""><div><h3>校外教學的一天</h3><span class="tag">人際互動</span><span class="tag">尋求支持</span><p>小組意見不合、與隊伍走散，練習安全求助。</p></div></div>
+      <div class="card story"><img src="assets/svg/card-sports-day.svg" alt=""><div><h3>運動會的一天</h3><span class="tag">挫折</span><span class="tag">團隊合作</span><p>到校 → 賽前緊張 → 接力衝刺 → 掉棒 → 同學不同反應 → 全班合照。</p></div></div>
+      <div class="card story"><img src="assets/svg/card-exam-day.svg" alt=""><div><h3>考試的一天</h3><span class="tag">壓力</span><span class="tag">自我接納</span><p>準備考試 → 聽到沒練過的題型 → 專心作答 → 卡在難題 → 對答案比較 → 放學回顧。</p></div></div>
+      <div class="card story"><img src="assets/svg/card-field-trip.svg" alt=""><div><h3>校外教學的一天</h3><span class="tag">人際互動</span><span class="tag">尋求支持</span><p>搭車出發 → 探索博物館 → 小組意見不合 → 與隊伍走散 → 重新會合 → 返校回顧。</p></div></div>
     </div>
-    <p class="note">玩完會產生「我的 OK 曲線」：六個事件的情緒曲線、紀錄與復原力工具卡，可存成 PNG。不以情緒高低或是否待在綠色區評分。</p>
+  </section>
+
+  <!-- ================= 二、互動與回饋 ================= -->
+  <div class="part" id="interaction"><span>二</span>遊戲互動與教學應用</div>
+
+  <section>
+    <h2><span class="no">流程</span>每個事件的互動流程</h2>
+    <div class="card">
+      <p>每個故事有 6 個事件，每個事件都會走過以下步驟，學生的選擇會即時改變波浪與後續回應：</p>
+      <div class="flow">
+        <div class="step"><div class="dot">1</div><b>閱讀情境</b><span>動態場景與角色對話；部分事件有衝浪挑戰</span></div>
+        <div class="step"><div class="dot">2</div><b>選情緒與身體訊號</b><span>情緒單選（含「其他感受」）、身體訊號可複選</span></div>
+        <div class="step"><div class="dot">3</div><b>波浪變化</b><span>波浪升高或降低，情緒精靈先接納感受</span></div>
+        <div class="step"><div class="dot">4</div><b>調節技能</b><span>自己決定要不要用，用完自評有沒有幫助</span></div>
+        <div class="step"><div class="dot">5</div><b>選擇行動</b><span>同學或老師依選擇給出不同回應</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">互動</span>實際操作與遊戲回饋</h2>
+    <div class="card table-card"><table>
+      <tr><th>互動</th><th>學生怎麼操作</th><th>遊戲怎麼回饋</th></tr>
+      <tr><td><b>情緒波浪衝浪</b></td><td>角色自動前進，按空白鍵或點畫面跳起來收集光點</td><td>角色隨波浪上下、板子依坡度傾斜；走過的浪就是自己的 OK 曲線</td></tr>
+      <tr><td><b>情緒辨識</b></td><td>從 4 個情緒中選一個，或打開「其他感受」再選</td><td>波浪依情緒升降；浪浪依所在區域給出不同的接納話語</td></tr>
+      <tr><td><b>身體訊號</b></td><td>複選心跳、呼吸、肩膀、肚子等線索</td><td>訊號會影響波浪高度；提示「身體常比腦袋更早發現情緒」</td></tr>
+      <tr><td><b>節奏衝浪</b>（運動會）</td><td>接力棒進圈圈時按下按鍵</td><td>「完美」「不錯」即時回饋；沒跟上只顯示「沒關係」，不扣分</td></tr>
+      <tr><td><b>平衡衝浪</b>（考試）</td><td>用 ← → 讓平衡計指針留在綠色區</td><td>分心事件會推動板子；失去平衡只提醒「穩住，慢慢來」</td></tr>
+      <tr><td><b>探索衝浪</b>（校外教學）</td><td>跳起來收集化石、葉子等展品</td><td>顯示發現的展品名稱與數量</td></tr>
+      <tr><td><b>呼吸光圈</b></td><td>光圈變大時按住吸氣、變小時放開吐氣，完成 3 次</td><td>光圈與浪浪一起變大變小；可選較慢節奏；沒跟上會溫和提示</td></tr>
+      <tr><td><b>安全港停靠</b></td><td>按住煞車讓衝浪板慢慢靠港，再選身體部位與休息方式</td><td>太快會輕輕彈開再試；停好後引導喝水、伸展、5-4-3-2-1 等休息</td></tr>
+      <tr><td><b>支持浮島</b></td><td>選支持者，逐段組出求助句</td><td>選到不清楚或不尊重的說法，會說明原因讓學生重選；完成後支持者回應</td></tr>
+      <tr><td><b>想法拼圖</b></td><td>把拼圖片放進「說出事實、不過度概括、我可以做的」三格</td><td>否認感受或更絕對的拼圖片會被退回並說明原因；完成後顯示平衡的想法</td></tr>
+      <tr><td><b>自評</b></td><td>用完技能後選「很有幫助、有一點、沒什麼幫助」</td><td>三種答案都被接納；「沒什麼幫助」會鼓勵下次換一種試試</td></tr>
+      <tr><td><b>行動選擇</b></td><td>選擇怎麼面對同學、怎麼處理問題</td><td>角色依選擇回應；最後一個事件的結局對話會依前面的選擇改變</td></tr>
+    </table></div>
+  </section>
+
+  <section>
+    <h2><span class="no">原則</span>回饋設計原則</h2>
+    <div class="fit">
+      <div class="card"><h3>不懲罰</h3><p>操作失敗不扣分、不影響情緒；所有技能都可以跳過，選擇「先不用」也會被接納。</p></div>
+      <div class="card"><h3>說明為什麼</h3><p>選錯拼圖或求助句時，不只說「錯」，而是說明哪裡太絕對、哪裡不清楚，讓學生自己修正。</p></div>
+      <div class="card"><h3>每次都不一樣</h3><p>情緒、身體訊號與行動選擇共同決定曲線；同一個故事重玩，會得到不同的曲線與結局對話。</p></div>
+      <div class="card"><h3>看得見的成果</h3><p>結束時產生「我的 OK 曲線」：六個事件的曲線與紀錄、用過的技能、個人復原力工具卡與鼓勵回饋，可存成 PNG。</p></div>
+    </div>
   </section>
 
   <section class="shots-sec">
     <h2><span class="no">畫面</span>遊戲畫面</h2>
     <div class="shots">
-      <figure><img src="assets/img/shot-surf.jpg" alt="衝浪畫面"><figcaption>情緒波浪衝浪</figcaption></figure>
+      <figure><img src="assets/img/shot-surf.jpg" alt="衝浪畫面"><figcaption>情緒波浪衝浪：海水依三區上色</figcaption></figure>
       <figure><img src="assets/img/shot-event.jpg" alt="事件與情緒選擇"><figcaption>事件與情緒辨識</figcaption></figure>
-      <figure><img src="assets/img/shot-result.jpg" alt="我的 OK 曲線"><figcaption>我的 OK 曲線</figcaption></figure>
+      <figure><img src="assets/img/shot-result.jpg" alt="我的 OK 曲線"><figcaption>我的 OK 曲線學習成果</figcaption></figure>
     </div>
   </section>
 
@@ -200,18 +307,49 @@
       <div class="card phase"><span class="time">20 分</span><h3>遊戲體驗</h3><p>學生自選 1 個故事玩完；老師巡視，協助操作與閱讀。</p><div class="q">「你選了哪個技能？為什麼想試它？」</div></div>
       <div class="card phase"><span class="time">12 分</span><h3>分享總結</h3><p>小組對照彼此的 OK 曲線；每人寫下 1 個「下次想試的方法」。</p><div class="q">「同一個事件，為什麼大家的曲線不一樣？」</div></div>
     </div>
-    <div class="card" style="margin-top:14px">
-      <h3>教學提醒</h3>
+    <div class="card table-card mt14"><table>
+      <tr><th>學習目標</th><th>可以觀察的表現</th><th>評量證據</th></tr>
+      <tr><td>辨識情緒</td><td>能說出至少 3 個事件中自己的情緒名稱</td><td>成果卡的情緒紀錄、口頭分享</td></tr>
+      <tr><td>覺察身體訊號</td><td>能說出一種情緒對應的身體線索</td><td>成果卡的身體訊號紀錄</td></tr>
+      <tr><td>選用調節策略</td><td>至少完成一種調節技能，並說明對自己有沒有幫助</td><td>成果卡的技能與自評、課堂觀察</td></tr>
+      <tr><td>做出合宜行動</td><td>能說出一個尊重或安全的做法，並寫下下次想試的方法</td><td>小組討論、學習單</td></tr>
+    </table>
+    <p class="small">評量重點是學生能否說出與使用方法，不比較曲線高低。</p></div>
+    <div class="card mt14">
+      <h3>延伸活動</h3>
+      <ul class="tips">
+        <li>同一個故事分組各玩一次，比較曲線，討論「為什麼同一件事大家感受不同」。</li>
+        <li>讓學生換一個故事再玩，比較兩天的波浪與用過的技能。</li>
+        <li>把成果卡帶回家，和家人分享「我的復原力工具卡」。</li>
+        <li>下課前全班一起練習一次「呼吸光圈」，作為日常的情緒小工具。</li>
+      </ul>
+      <h3 class="mt">教學提醒</h3>
       <ul class="tips">
         <li>情緒數值只是遊戲模擬，不是心理測驗，不用曲線比較或評分學生。</li>
         <li>強調「每種感受都可以被接納」；復原力是能慢慢回到可以應對的狀態。</li>
         <li>若學生持續顯示強烈的不舒服，請私下關心，並視需要轉介輔導老師。</li>
-        <li>需要安靜環境的學生，可開啟「降低動畫」或關閉音效；也可用數字鍵選擇。</li>
       </ul>
     </div>
   </section>
 
-  <footer><a href="ai-process.html" style="color:inherit">AI 歷程與材料包</a>｜OK 曲線衝浪：我的校園一天｜所有程式、美術與音效皆為原創，純前端網頁，不蒐集任何個人資料。</footer>
+  <!-- ================= 三、歷程與材料包 ================= -->
+  <div class="part" id="process"><span>三</span>開發歷程</div>
+
+  <section>
+    <div class="card process">
+      <p>本作品主要由 AI 工具 <b>Claude（Anthropic，Claude Opus 5.5）</b>協助開發，作者負責需求設計、試玩查核、修改決策與部署上線。完整歷程整理在「AI 歷程與材料包」頁面：</p>
+      <div class="pgrid">
+        <div><b>1 份</b><span>完整任務提示詞（全文公開）</span></div>
+        <div><b>9 次</b><span>關鍵互動與生成結果</span></div>
+        <div><b>8 項</b><span>修改原因與修正方式</span></div>
+        <div><b>0 張</b><span>外部圖片或音檔：美術與音效皆為原創</span></div>
+      </div>
+      <p>內容包含：工具名稱、完整提示詞、關鍵互動與生成結果、修改原因、人工查核與編修、素材與來源。</p>
+      <div class="actions left"><a class="btn sun" href="ai-process.html">查看 AI 歷程與材料包</a></div>
+    </div>
+  </section>
+
+  <footer><a href="index.html">開始遊戲</a>　·　<a href="ai-process.html">AI 歷程與材料包</a>　·　OK 曲線衝浪：我的校園一天｜所有程式、美術與音效皆為原創，純前端網頁，不蒐集任何個人資料。</footer>
 </div>
 <script>
   // 列印：在不允許列印的嵌入環境（例如預覽框）中隱藏按鈕，避免無效按鈕
